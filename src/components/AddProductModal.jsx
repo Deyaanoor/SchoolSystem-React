@@ -39,6 +39,14 @@ const AddProductModal = ({ show, handleClose, handleSubmit }) => {
         alert("There was an error.");
       }
     };
+    const handleFormClose = () => {
+      setEditedData({
+        name: "",
+        price: "",
+        imageUrl: "" 
+      });
+      handleClose();
+    }
   
     return (
       <Modal show={show} onHide={handleClose} centered>
@@ -80,7 +88,7 @@ const AddProductModal = ({ show, handleClose, handleSubmit }) => {
           </Modal.Body>
   
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="secondary" onClick={handleFormClose}>
               Cancel
             </Button>
             <Button variant="primary" type="submit">

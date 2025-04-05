@@ -3,7 +3,8 @@ import { useSelector } from "react-redux";
 import AddStudent from "./addStudent";
 import AddTeacher from "./addTeacher";
 import Teachers from "./teachersPage";
-import Overvew from "./overvew";
+import Students from "./studentsPage";
+import { useEffect } from "react";
 import Store from "./store";
 import {
   FaStore,
@@ -17,7 +18,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {
   store,
   dashboard,
-  overview,
+
+  studentLabel,
   addStudent,
   logout,
   addTeacher,
@@ -26,7 +28,9 @@ import {
 
 const Home = () => {
   const role = useSelector((state) => state.user.role);
-
+  
+  
+  
   return (
     <div className="d-flex">
       <div
@@ -55,10 +59,10 @@ const Home = () => {
           
             <li className="p-2">
               <Link
-                to="/home/overview"
+                to="/home/students"
                 className="btn btn-outline-primary w-100 d-flex align-items-center"
               >
-                <FaHome className="me-2" /> {overview}
+                <FaHome className="me-2" /> {studentLabel}
               </Link>
             </li>
           
@@ -108,7 +112,7 @@ const Home = () => {
         <Routes>
           <Route path="" element={<Store />} />
          
-            <Route path="/overview" element={<Overvew />} />
+            <Route path="/students" element={<Students />} />
         
           {role === "admin" && <Route path="/teachers" element={<Teachers />} />}
           {role === "admin" && <Route path="/addStudent" element={<AddStudent />} />}

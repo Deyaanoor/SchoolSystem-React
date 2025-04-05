@@ -12,6 +12,9 @@ import {
   saveChanges,
   pleaseFillAllFields,
 } from "../Constants/constant";
+import Zoom from "react-medium-image-zoom"; // استيراد المكتبة
+
+import "../zoomStyle.css"; // تأكد من استيراد الأنماط الخاصة بالمكتبة
 
 const EditModal = ({ entityType, entityId, onClose, onSave, fields }) => {
   const [entityData, setEntityData] = useState(null);
@@ -95,11 +98,13 @@ const EditModal = ({ entityType, entityId, onClose, onSave, fields }) => {
             )}
             {entityType === "Products" && (
               <div className="card text-center shadow-sm p-3 mb-3">
-                <img
-                  src={editedData.imageUrl}
-                  alt="Student"
-                  className="card-img-top mx-auto d-block w-50"
-                />
+                <Zoom>
+                  <img
+                    src={editedData.imageUrl}
+                    alt="Product"
+                    className="card-img-top mx-auto d-block w-50"
+                  />
+                </Zoom>
                 <div className="card-body">
                   <h5 className="card-title">{editedData.name}</h5>
                 </div>

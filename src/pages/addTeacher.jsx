@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { addNewTeacher } from "../redux/teachersSlice";
 import { InputForm, Botton } from "../components/Form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify"; 
+
 import { fullNameRequired, emailRequired, ageRequired, validEmailError } from "../Constants/constant";
 
 const AddTeacher = () => {
@@ -32,11 +34,11 @@ const AddTeacher = () => {
       return;
     }
 
-    dispatch(addNewTeacher({ name, email }));
+    dispatch(addNewTeacher({ name, email ,id: Date.now().toString()}));
     
     setName("");
     setEmail("");
-   
+   toast.success("Teacher added successfully!");  
     navigate("/home/Teachers");
   };
 

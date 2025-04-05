@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useDispatch ,useSelector} from "react-redux";
 import { addNewStudent } from "../redux/studentsSlice";
+import { fetchTeachers } from "../redux/teachersSlice";
 import { InputForm, Botton, TeacherSelect } from "../components/Form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify"; 
+
 import {
   fullNameRequired,
   emailRequired,
@@ -20,9 +23,15 @@ const AddStudent = () => {
   const [errorEmail, setErrorEmail] = useState("");
   const [errorAge, setErrorAge] = useState("");
   const [errorTeacher, setErrorTeacher] = useState(""); 
+  const dispatch = useDispatch();
+  useEffect(() => {
+     dispatch(fetchTeachers({ reset: false }))
+  }, [dispatch]);
+
+
   const teachers = useSelector((state) => state.teachers.teachers);
 
-  const dispatch = useDispatch();
+ 
   const navigate = useNavigate();
 
   const handleAddStudent = async (e) => {
@@ -49,13 +58,16 @@ const AddStudent = () => {
       setErrorTeacher(teacherRequired); 
     }
 
-     dispatch(addNewStudent({ name, email, age: Number(age), teacher: selectedTeacher }));
+     dispatch(addNewStudent({ name, email, age: Number(age), teacher: selectedTeacher ,id: Date.now().toString()}));
     
     setName("");
     setEmail("");
     setAge("");
     setSelectedTeacher(""); 
-    navigate("/home");
+    toast.success("Student added successfully!");  
+
+    navigate("/home/students");
+
   };
 
   return (
