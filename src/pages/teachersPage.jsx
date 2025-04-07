@@ -106,30 +106,27 @@ const Teachers = () => {
     <Box sx={{ height: 600, width: "100%", mt: 4 }}>
       <h2>Teacher List</h2>
       <DataGrid
-  rows={teachers}
-  columns={columns}
-  getRowId={(row) => row.id} 
-  loading={loading}
-  disableSelectionOnClick
-  scrollbarSize={10}
-  rowHeight={60}
-  autoHeight
-  pagination={false}
-  hideFooterPagination
-  onScroll={() => {
-    if (!loading && hasMore) {
-      dispatch(fetchTeachers({ lastDoc, reset: false }));
-    }
-  }}
-/>
+        rows={teachers}
+        columns={columns}
+        getRowId={(row) => row.id}
+        loading={loading}
+        disableSelectionOnClick
+        scrollbarSize={10}
+        rowHeight={60}
+        autoHeight
+        pagination={false}
+        hideFooterPagination
+      />
+
+      {teachers.length > 0 && (
+        <div ref={lastTeacherRef} style={{ height: "30px" }} />
+      )}
 
       {!hasMore && !loading && (
         <Box textAlign="center" mt={2} color="gray">
           {noMoreteachers}
         </Box>
       )}
-
-      {teachers.length > 0 && <div ref={lastTeacherRef} />}
 
       {selectedTeacherId && (
         <EditModal

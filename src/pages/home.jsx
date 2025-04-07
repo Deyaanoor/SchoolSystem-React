@@ -18,7 +18,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {
   store,
   dashboard,
-
   studentLabel,
   addStudent,
   logout,
@@ -28,9 +27,7 @@ import {
 
 const Home = () => {
   const role = useSelector((state) => state.user.role);
-  
-  
-  
+
   return (
     <div className="d-flex">
       <div
@@ -56,18 +53,16 @@ const Home = () => {
             </Link>
           </li>
 
-          
-            <li className="p-2">
-              <Link
-                to="/home/students"
-                className="btn btn-outline-primary w-100 d-flex align-items-center"
-              >
-                <FaHome className="me-2" /> {studentLabel}
-              </Link>
-            </li>
-          
+          <li className="p-2">
+            <Link
+              to="/home/students"
+              className="btn btn-outline-primary w-100 d-flex align-items-center"
+            >
+              <FaHome className="me-2" /> {studentLabel}
+            </Link>
+          </li>
 
-          {role === "admin" && (
+          {(role === "admin" || role === "teacher") && (
             <li className="p-2">
               <Link
                 to="/home/teachers"
@@ -111,12 +106,18 @@ const Home = () => {
       <div className="container-fluid" style={{ marginLeft: "200px" }}>
         <Routes>
           <Route path="" element={<Store />} />
-         
-            <Route path="/students" element={<Students />} />
-        
-          {role === "admin" && <Route path="/teachers" element={<Teachers />} />}
-          {role === "admin" && <Route path="/addStudent" element={<AddStudent />} />}
-          {role === "admin" && <Route path="/addTeacher" element={<AddTeacher />} />}
+
+          <Route path="/students" element={<Students />} />
+
+          {(role === "admin" || role === "teacher") && (
+            <Route path="/teachers" element={<Teachers />} />
+          )}
+          {role === "admin" && (
+            <Route path="/addStudent" element={<AddStudent />} />
+          )}
+          {role === "admin" && (
+            <Route path="/addTeacher" element={<AddTeacher />} />
+          )}
         </Routes>
       </div>
     </div>

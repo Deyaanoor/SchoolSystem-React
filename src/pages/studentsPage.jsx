@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchStudents, removeStudent, editStudent } from "../redux/studentsSlice";
+import {
+  fetchStudents,
+  removeStudent,
+  editStudent,
+} from "../redux/studentsSlice";
 import { DataGrid } from "@mui/x-data-grid";
 import EditModal from "../components/EditModal";
 import DeleteModal from "../components/AlertToDelete";
@@ -116,21 +120,15 @@ const Students = () => {
         autoHeight
         pagination={false}
         hideFooterPagination
-        onScroll={() => {
-          if (!loading && hasMore) {
-            dispatch(fetchStudents({ lastDoc, reset: false }));
-          }
-        }}
       />
-      
+      {students.length > 0 && (
+        <div ref={lastStudentRef} style={{ height: "30px" }} />
+      )}
+
       {!hasMore && !loading && (
         <Box textAlign="center" mt={2} color="gray">
           {noMoreStudents}
         </Box>
-      )}
-
-      {students.length > 0 && (
-        <div ref={lastStudentRef} />
       )}
 
       {selectedStudentId && (
@@ -139,9 +137,19 @@ const Students = () => {
           entityId={selectedStudentId}
           onClose={() => setSelectedStudentId(null)}
           onSave={handleStudentSave}
-          fields={[ 
-            { id: "name", label: "Full Name", placeholder: "Enter full name", type: "text" },
-            { id: "age", label: "Age", placeholder: "Enter age", type: "number" },
+          fields={[
+            {
+              id: "name",
+              label: "Full Name",
+              placeholder: "Enter full name",
+              type: "text",
+            },
+            {
+              id: "age",
+              label: "Age",
+              placeholder: "Enter age",
+              type: "number",
+            },
           ]}
         />
       )}
