@@ -1,14 +1,16 @@
 import { Routes, Route, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Overview from "./overview";
 import AddStudent from "./addStudent";
 import AddTeacher from "./addTeacher";
 import Teachers from "./teachersPage";
 import Students from "./studentsPage";
-import { useEffect } from "react";
+import ContactForm from "./ContactUs";
 import Store from "./store";
 import {
   FaStore,
   FaHome,
+  FaUserGraduate,
   FaChalkboardTeacher,
   FaUserPlus,
   FaUserTie,
@@ -23,6 +25,7 @@ import {
   logout,
   addTeacher,
   TeachersLabel,
+  overview,
 } from "../Constants/constant";
 
 const Home = () => {
@@ -49,6 +52,14 @@ const Home = () => {
               to="/home"
               className="btn btn-outline-primary w-100 d-flex align-items-center"
             >
+              <FaHome className="me-2" /> {overview}
+            </Link>
+          </li>
+          <li className="p-2">
+            <Link
+              to="/home/store"
+              className="btn btn-outline-primary w-100 d-flex align-items-center"
+            >
               <FaStore className="me-2" /> {store}
             </Link>
           </li>
@@ -58,7 +69,15 @@ const Home = () => {
               to="/home/students"
               className="btn btn-outline-primary w-100 d-flex align-items-center"
             >
-              <FaHome className="me-2" /> {studentLabel}
+              <FaUserGraduate className="me-2" /> {studentLabel}
+            </Link>
+          </li>
+          <li className="p-2">
+            <Link
+              to="/home/contactUs"
+              className="btn btn-outline-primary w-100 d-flex align-items-center"
+            >
+              <FaUserGraduate className="me-2" /> "Contact Us"
             </Link>
           </li>
 
@@ -105,9 +124,10 @@ const Home = () => {
 
       <div className="container-fluid" style={{ marginLeft: "200px" }}>
         <Routes>
-          <Route path="" element={<Store />} />
-
+          <Route path="" element={<Overview />} />
+          <Route path="/store" element={<Store />} />
           <Route path="/students" element={<Students />} />
+          <Route path="/contactUs" element={<ContactForm />} />
 
           {(role === "admin" || role === "teacher") && (
             <Route path="/teachers" element={<Teachers />} />

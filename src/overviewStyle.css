@@ -1,0 +1,9 @@
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #6c757d; 
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+  background-color: #5a6268; 
+}

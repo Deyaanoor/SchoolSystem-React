@@ -3,6 +3,7 @@ import {
   addProduct,
   getProducts,
   updateProduct,
+  getTop10Products,
 } from "../firebase/storeService";
 
 export const addNewProduct = createAsyncThunk(
@@ -38,6 +39,18 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
+export const fetch10Products = createAsyncThunk(
+  "products/fetch10Products",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await getTop10Products();
+      return { topProducts: response.products };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const editProduct = createAsyncThunk(
   "teachers/editProduct",
   async ({ id, updatedData }, { rejectWithValue }) => {
@@ -54,6 +67,7 @@ const productSlice = createSlice({
   name: "products",
   initialState: {
     products: [],
+    topProducts: [],
     loading: false,
     error: null,
     hasMore: true,
@@ -116,6 +130,12 @@ const productSlice = createSlice({
       .addCase(editProduct.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+
+      .addCase(fetch10Products.fulfilled, (state, action) => {
+        if (action.payload && action.payload.topProducts) {
+          state.topProducts = action.payload.topProducts;
+        }
       });
   },
 });

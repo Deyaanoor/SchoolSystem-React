@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts, addNewProduct, editProduct } from "../redux/storeSlice";
 import AddProductModal from "../components/AddProductModal";
 import EditModal from "../components/EditModal";
-import  '../storeStyle.css'
+import "../storeStyle.css";
 
 const Store = () => {
   const [showModal, setShowModal] = useState(false);
@@ -84,7 +84,6 @@ const Store = () => {
             className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
           >
             <div className="card h-100 shadow hover-effect">
-
               <img
                 src={product.imageUrl}
                 className="card-img-top"

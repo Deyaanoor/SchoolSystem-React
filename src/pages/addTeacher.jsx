@@ -5,7 +5,7 @@ import { InputForm, Botton } from "../components/Form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify"; 
 
-import { fullNameRequired, emailRequired, ageRequired, validEmailError } from "../Constants/constant";
+import { fullNameRequired, emailRequired, validEmailError } from "../Constants/constant";
 
 const AddTeacher = () => {
   const [name, setName] = useState("");
