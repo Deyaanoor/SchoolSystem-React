@@ -34,12 +34,12 @@ const AddTeacher = () => {
       return;
     }
 
-    dispatch(addNewTeacher({ name, email ,id: Date.now().toString()}));
+   await dispatch(addNewTeacher({ name, email ,id: Date.now().toString()}));
     
     setName("");
     setEmail("");
-   toast.success("Teacher added successfully!");  
-    navigate("/home/Teachers");
+    toast.success("Teacher added successfully!");  
+    navigate("/home/teachers");
   };
 
   return (

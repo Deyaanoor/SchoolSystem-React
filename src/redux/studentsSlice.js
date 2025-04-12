@@ -105,6 +105,7 @@ const studentSlice = createSlice({
       })
       .addCase(removeStudent.fulfilled, (state, action) => {
         state.students = state.students.filter(student => student.id !== action.payload);
+        
         state.loading = false;
       })
       .addCase(removeStudent.rejected, (state, action) => {

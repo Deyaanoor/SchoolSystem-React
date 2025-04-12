@@ -43,8 +43,11 @@ const Teachers = () => {
       }
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
+          console.log("first");
+          
           dispatch(fetchTeachers({ lastDoc, reset: false }));
-        }
+        
+      }
       });
       if (node) observer.current.observe(node);
     },

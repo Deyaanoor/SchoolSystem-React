@@ -20,13 +20,19 @@ const addProduct = async (productData) => {
       imageUrl: productData.imageUrl,
     };
 
-    await addDoc(collection(db, "products"), newProduct);
-    console.log("Product added successfully!");
+    const docRef = await addDoc(collection(db, "products"), newProduct);
+    
+    const productWithId = { ...newProduct, id: docRef.id };
+    
+    console.log("Product added successfully with ID:", docRef.id);
+    
+    return productWithId;
   } catch (error) {
     console.error("Error adding product: ", error);
     throw error;
   }
 };
+
 
 const getProducts = async (lastDoc, limitCount) => {
   let productRef = query(
@@ -55,12 +61,13 @@ const getProducts = async (lastDoc, limitCount) => {
 
 const updateProduct = async (id, updatedData) => {
   try {
-    await updateDoc(doc(db, "product", id), updatedData);
+    await updateDoc(doc(db, "products", id), updatedData);
     console.log("product updated successfully");
   } catch (error) {
     console.error("Error updating product:", error);
   }
 };
+
 const getProductById = async (id) => {
   try {
     const productRef = doc(db, "products", id);
@@ -79,22 +86,32 @@ const getProductById = async (id) => {
 const getTop10Products = async () => {
   const productRef = query(
     collection(db, "products"),
-    orderBy("price", "desc"),
+    orderBy("price", "desc"),  
     limit(10)
   );
 
   try {
     const snapshot = await getDocs(productRef);
-    if (snapshot.empty) return { products: [] };
 
-    return {
-      products: snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
-    };
+    if (snapshot.empty) {
+      console.log("No products found or empty collection.");
+      return { products: [] };
+    }
+
+    const products = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    console.log("Top 10 Expensive Products:", products); 
+    return { products };
   } catch (error) {
     console.error("Error getting top expensive products:", error);
-    return { products: [] };
+    return { products: [] }; 
   }
 };
+
+
 
 export {
   addProduct,

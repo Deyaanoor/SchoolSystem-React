@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 
 const ContactForm = () => {
   const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
   const [userMessage, setUserMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -14,7 +13,7 @@ const ContactForm = () => {
 
     const templateParams = {
       name: userName,
-      email: userEmail,
+      email: "deyaanoor9@gmail.com",
       message: userMessage,
     };
 
@@ -28,9 +27,9 @@ const ContactForm = () => {
       .then(
         (response) => {
           setIsLoading(false);
-          toast.success(`Message sent successfully to ${userEmail}!`);
+          toast.success(`Message sent successfully to deyaanoor9@gmail.com!`);
           setUserName("");
-          setUserEmail("");
+         
           setUserMessage("");
         },
         (error) => {
@@ -60,19 +59,7 @@ const ContactForm = () => {
             required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="userEmail" className="form-label">
-            Email:
-          </label>
-          <input
-            type="email"
-            id="userEmail"
-            className="form-control"
-            value={userEmail}
-            onChange={(e) => setUserEmail(e.target.value)}
-            required
-          />
-        </div>
+        
         <div className="mb-3">
           <label htmlFor="userMessage" className="form-label">
             Message:

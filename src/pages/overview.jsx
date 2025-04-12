@@ -18,6 +18,7 @@ const Overview = () => {
     dispatch(fetchTeachers({ reset: true }));
     dispatch(fetch10Products());
   }, [dispatch]);
+
   return (
     <div className="container mt-5">
       <div className="row justify-content-center g-4">

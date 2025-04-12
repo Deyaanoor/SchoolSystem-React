@@ -25,7 +25,7 @@ const AddStudent = () => {
   const [errorTeacher, setErrorTeacher] = useState(""); 
   const dispatch = useDispatch();
   useEffect(() => {
-     dispatch(fetchTeachers({ reset: false }))
+     dispatch(fetchTeachers({ reset: true }))
   }, [dispatch]);
 
 
@@ -58,7 +58,7 @@ const AddStudent = () => {
       setErrorTeacher(teacherRequired); 
     }
 
-     dispatch(addNewStudent({ name, email, age: Number(age), teacher: selectedTeacher ,id: Date.now().toString()}));
+    await dispatch(addNewStudent({ name, email, age: Number(age), teacher: selectedTeacher ,id: Date.now().toString()}));
     
     setName("");
     setEmail("");
@@ -66,7 +66,7 @@ const AddStudent = () => {
     setSelectedTeacher(""); 
     toast.success("Student added successfully!");  
 
-    navigate("/home/students");
+     navigate("/home/students");
 
   };
 

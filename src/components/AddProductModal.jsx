@@ -67,13 +67,14 @@ const AddProductModal = ({ show, handleClose, handleSubmit }) => {
             </Form.Group>
   
             <Form.Group className="mb-3">
-              <InputForm
-                labelName="Price"
-                placeholderName="Enter price"
-                typeInput="number"
-                value={editedData.price}
-                onChange={(e) => setEditedData({ ...editedData, price: e.target.value })}
-              />
+            <InputForm
+  labelName="Price"
+  placeholderName="Enter price"
+  typeInput="number"
+  value={editedData.price}
+  onChange={(e) => setEditedData({ ...editedData, price: parseFloat(e.target.value) || "" })}
+/>
+
             </Form.Group>
   
             <Form.Group className="mb-3">

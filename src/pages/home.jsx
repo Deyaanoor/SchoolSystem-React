@@ -14,6 +14,7 @@ import {
   FaChalkboardTeacher,
   FaUserPlus,
   FaUserTie,
+  FaEnvelope,
 } from "react-icons/fa";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -26,6 +27,7 @@ import {
   addTeacher,
   TeachersLabel,
   overview,
+  contactUs,
 } from "../Constants/constant";
 
 const Home = () => {
@@ -36,12 +38,13 @@ const Home = () => {
       <div
         className="sidebar bg-dark text-white"
         style={{
-          width: "200px",
+          width: "230px",
           height: "100vh",
           position: "fixed",
           top: 0,
           left: 0,
           zIndex: 1000,
+          overflowY: "auto",
         }}
       >
         <h4 className="p-3">{dashboard}</h4>
@@ -53,6 +56,15 @@ const Home = () => {
               className="btn btn-outline-primary w-100 d-flex align-items-center"
             >
               <FaHome className="me-2" /> {overview}
+            </Link>
+          </li>
+
+          <li className="p-2">
+            <Link
+              to="/home/contactUs"
+              className="btn btn-outline-primary w-100 d-flex align-items-center"
+            >
+              <FaEnvelope className="me-2" /> {contactUs}
             </Link>
           </li>
           <li className="p-2">
@@ -70,14 +82,6 @@ const Home = () => {
               className="btn btn-outline-primary w-100 d-flex align-items-center"
             >
               <FaUserGraduate className="me-2" /> {studentLabel}
-            </Link>
-          </li>
-          <li className="p-2">
-            <Link
-              to="/home/contactUs"
-              className="btn btn-outline-primary w-100 d-flex align-items-center"
-            >
-              <FaUserGraduate className="me-2" /> "Contact Us"
             </Link>
           </li>
 
@@ -122,7 +126,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="container-fluid" style={{ marginLeft: "200px" }}>
+      <div className="container-fluid" style={{ marginLeft: "230px" }}>
         <Routes>
           <Route path="" element={<Overview />} />
           <Route path="/store" element={<Store />} />

@@ -4,12 +4,13 @@ import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyAkM10bJvr4t44scDZUtYLUp5sbxqA-gNU",
-  authDomain: "react-task-88641.firebaseapp.com",
-  projectId: "react-task-88641",
-  storageBucket: "react-task-88641.appspot.com",
-  messagingSenderId: "849042342315",
-  appId: "1:849042342315:web:02ee32184fe04b8f1812ee"
+  apiKey: "AIzaSyATFRkaHmGF1dOAF6ikBs9PnAai1oj98oA",
+  authDomain: "react-task-4edd3.firebaseapp.com",
+  projectId: "react-task-4edd3",
+  storageBucket: "react-task-4edd3.firebasestorage.app",
+  messagingSenderId: "1074493469718",
+  appId: "1:1074493469718:web:040ab90021b0132caa3137",
+  measurementId: "G-D2J1B7C5JG"
 };
 
 const app = initializeApp(firebaseConfig);

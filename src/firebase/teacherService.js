@@ -1,12 +1,16 @@
 import { db } from "./firebaseConfig"; 
-import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy, limit, startAfter ,getDoc } from "firebase/firestore";
+import { collection, setDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy, limit, startAfter ,getDoc } from "firebase/firestore";
+
 
 const addTeacher = async (teacher) => {
   try {
-    const docRef = await addDoc(collection(db, "teachers"), teacher);
-    console.log("teacher added successfully:", docRef.id);
+    const teacherId = Date.now().toString(); 
+    const docRef = doc(db, "teachers", teacherId);
+    await setDoc(docRef, { ...teacher, id: teacherId });
+    return teacherId;
   } catch (error) {
-    console.error("Error adding teacher:", error);
+    console.error("Error adding teacher:", error.message);
+    return null;
   }
 };
 

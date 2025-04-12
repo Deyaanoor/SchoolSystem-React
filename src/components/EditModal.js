@@ -12,9 +12,9 @@ import {
   saveChanges,
   pleaseFillAllFields,
 } from "../Constants/constant";
-import Zoom from "react-medium-image-zoom"; // استيراد المكتبة
+import Zoom from "react-medium-image-zoom"; 
 
-import "../zoomStyle.css"; // تأكد من استيراد الأنماط الخاصة بالمكتبة
+import "../zoomStyle.css"; 
 
 const EditModal = ({ entityType, entityId, onClose, onSave, fields }) => {
   const [entityData, setEntityData] = useState(null);
