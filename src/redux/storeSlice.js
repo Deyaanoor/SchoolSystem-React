@@ -15,21 +15,14 @@ export const addNewProduct = createAsyncThunk(
         price: parseFloat(productData.price),
         imageUrl: productData.imageUrl,
       };
-
-      // إضافة المنتج إلى Firestore
       const productWithId = await addProduct(productWithImage);
-
-      // جلب جميع المنتجات بعد إضافة المنتج الجديد
       dispatch(fetchProducts({ reset: true }));
-
-      // إرجاع المنتج مع الـ id المضاف من Firestore
       return { ...productWithImage, id: productWithId.id };
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
-
 
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",

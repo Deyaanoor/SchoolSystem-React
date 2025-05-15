@@ -1,8 +1,8 @@
 import React, { useState,useEffect } from "react";
 import { useDispatch ,useSelector} from "react-redux";
-import { addNewStudent } from "../redux/studentsSlice";
-import { fetchTeachers } from "../redux/teachersSlice";
-import { InputForm, Botton, TeacherSelect } from "../components/Form";
+import { addNewStudent } from "../../redux/studentsSlice";
+import { fetchTeachers } from "../../redux/teachersSlice";
+import { InputForm, Botton, TeacherSelect } from "../../components/Form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify"; 
 
@@ -12,7 +12,7 @@ import {
   ageRequired,
   validEmailError,
   teacherRequired
-} from "../Constants/constant";
+} from "../../Constants/constant";
 
 const AddStudent = () => {
   const [name, setName] = useState("");
@@ -31,7 +31,7 @@ const AddStudent = () => {
 
   const teachers = useSelector((state) => state.teachers.teachers);
 
- 
+
   const navigate = useNavigate();
 
   const handleAddStudent = async (e) => {
@@ -72,7 +72,8 @@ const AddStudent = () => {
 
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100 bg-light">
-      <div className="card shadow p-4 rounded-4 w-50 mt-3 mb-2">
+    <div className={"card shadow p-4 rounded-4 col-12 col-sm-6 mt-3 mb-2"}>
+
         <h2>Add New Student</h2>
 
         <InputForm

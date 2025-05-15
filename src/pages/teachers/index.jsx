@@ -4,27 +4,32 @@ import {
   fetchTeachers,
   removeTeacher,
   editTeacher,
-} from "../redux/teachersSlice";
+} from "../../redux/teachersSlice";
 import { DataGrid } from "@mui/x-data-grid";
-import EditModal from "../components/EditModal";
-import DeleteModal from "../components/AlertToDelete";
+import EditModal from "../../components/EditModal";
+import DeleteModal from "../../components/AlertToDelete";
 import {
-  edit,
-  actionsLabel,
-  deleteLabel,
-  emailLabel,
-  noMoreteachers,
-  nameLabel,
-} from "../Constants/constant";
-import { Button, Box } from "@mui/material";
 
+  noMoreteachers,
+} from "../../Constants/constant";
+import {Box } from "@mui/material";
+import useTeacher from "../../hooks/useTeacher";
+
+
+const fields=[
+  {
+    id: "name",
+    label: "Full Name",
+    placeholder: "Enter full name",
+    type: "text",
+  },
+]
 const Teachers = () => {
   const dispatch = useDispatch();
   const teachers = useSelector((state) => state.teachers.teachers);
   const loading = useSelector((state) => state.teachers.loading);
   const hasMore = useSelector((state) => state.teachers.hasMore);
   const lastDoc = useSelector((state) => state.teachers.lastDoc);
-  const role = useSelector((state) => state.user.role);
 
   const [selectedTeacherId, setSelectedTeacherId] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -72,42 +77,11 @@ const Teachers = () => {
     dispatch(editTeacher({ id, updatedData }));
   };
 
-  const columns = [
-    { field: "name", headerName: nameLabel, flex: 1 },
-    { field: "email", headerName: emailLabel, flex: 1.5 },
-  ];
-
-  if (role === "admin") {
-    columns.push({
-      field: "actions",
-      headerName: actionsLabel,
-      flex: 1,
-      renderCell: (params) => (
-        <Box display="flex" gap={1}>
-          <Button
-            variant="contained"
-            size="small"
-            color="warning"
-            onClick={() => setSelectedTeacherId(params.row.id)}
-          >
-            {edit}
-          </Button>
-          <Button
-            variant="contained"
-            size="small"
-            color="error"
-            onClick={() => handleShowDeleteModal(params.row.id)}
-          >
-            {deleteLabel}
-          </Button>
-        </Box>
-      ),
-    });
-  }
+  const columns = useTeacher( setSelectedTeacherId, handleShowDeleteModal);
 
   return (
-    <Box sx={{ height: 600, width: "100%", mt: 4 }}>
-      <h2>Teacher List</h2>
+   <Box sx={{ width: '100%', overflowX: 'auto' }}>
+      <h2 className="mt-5">Teacher List</h2>
       <DataGrid
         rows={teachers}
         columns={columns}
@@ -137,14 +111,7 @@ const Teachers = () => {
           entityId={selectedTeacherId}
           onClose={() => setSelectedTeacherId(null)}
           onSave={handleTeacherSave}
-          fields={[
-            {
-              id: "name",
-              label: "Full Name",
-              placeholder: "Enter full name",
-              type: "text",
-            },
-          ]}
+          fields={fields}
         />
       )}
 

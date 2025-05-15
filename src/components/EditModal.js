@@ -13,8 +13,8 @@ import {
   pleaseFillAllFields,
 } from "../Constants/constant";
 import Zoom from "react-medium-image-zoom"; 
-
-import "../zoomStyle.css"; 
+import { toast } from "react-toastify";
+import "../pages/Store/storeStyle.css"; 
 
 const EditModal = ({ entityType, entityId, onClose, onSave, fields }) => {
   const [entityData, setEntityData] = useState(null);
@@ -53,7 +53,7 @@ const EditModal = ({ entityType, entityId, onClose, onSave, fields }) => {
       setError(pleaseFillAllFields);
       return;
     }
-
+    toast.success(`${entityType} updated successfully!`);
     onSave(entityId, editedData);
     onClose();
   };

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addNewTeacher } from "../redux/teachersSlice";
-import { InputForm, Botton } from "../components/Form";
+import { addNewTeacher } from "../../redux/teachersSlice";
+import { InputForm, Botton } from "../../components/Form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify"; 
 
-import { fullNameRequired, emailRequired, validEmailError } from "../Constants/constant";
+import { fullNameRequired, emailRequired, validEmailError } from "../../Constants/constant";
 
 const AddTeacher = () => {
   const [name, setName] = useState("");
@@ -44,7 +44,7 @@ const AddTeacher = () => {
 
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100 bg-light">
-      <div className="card shadow p-4 rounded-4 w-50 mt-3 mb-2">
+      <div className="card shadow p-4 rounded-4 col-12 col-sm-6 mt-3 mb-2">
         <h2>Add New teacher</h2>
 
         <InputForm

@@ -1,5 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { addStudent, getStudents, deleteStudent, updateStudent } from "../firebase/studentService";
+import {
+  addStudent,
+  getStudents,
+  deleteStudent,
+  updateStudent,
+} from "../firebase/studentService";
 
 export const fetchStudents = createAsyncThunk(
   "students/fetchStudents",
@@ -58,8 +63,7 @@ const studentSlice = createSlice({
     hasMore: true,
     lastDoc: null,
   },
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchStudents.pending, (state) => {
@@ -72,8 +76,12 @@ const studentSlice = createSlice({
           if (action.payload.reset) {
             state.students = action.payload.students;
           } else {
-            const existingIds = new Set(state.students.map(student => student.id));
-            const newStudents = action.payload.students.filter(student => !existingIds.has(student.id));
+            const existingIds = new Set(
+              state.students.map((student) => student.id)
+            );
+            const newStudents = action.payload.students.filter(
+              (student) => !existingIds.has(student.id)
+            );
             state.students = state.students.concat(newStudents);
           }
 
@@ -104,8 +112,10 @@ const studentSlice = createSlice({
         state.loading = true;
       })
       .addCase(removeStudent.fulfilled, (state, action) => {
-        state.students = state.students.filter(student => student.id !== action.payload);
-        
+        state.students = state.students.filter(
+          (student) => student.id !== action.payload
+        );
+
         state.loading = false;
       })
       .addCase(removeStudent.rejected, (state, action) => {
@@ -118,7 +128,7 @@ const studentSlice = createSlice({
       })
       .addCase(editStudent.fulfilled, (state, action) => {
         const { id, updatedData } = action.payload;
-        const index = state.students.findIndex(student => student.id === id);
+        const index = state.students.findIndex((student) => student.id === id);
         if (index !== -1) {
           state.students[index] = { ...state.students[index], ...updatedData };
         }
