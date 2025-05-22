@@ -8,6 +8,7 @@ import { fetch10Products } from "../../redux/storeSlice";
 import TopStudents from "./TopStudents";
 import TopTeachers from "./TopTeachers";
 import TopProducts from "./TopProducts";
+import EmptyState from "../../components/EmptyState";
 
 import "./overviewStyle.css";
 
@@ -23,33 +24,39 @@ const Overview = () => {
     dispatch(fetch10Products());
   }, [dispatch]);
 
-  return (
-    <div className="container mt-5">
-      <div className="row justify-content-center g-4">
-        <h1 className="text-center mb-2 text-primary fw-bold">Overview</h1>
-        
-        {students?.length > 0 && (
-          <div className="col-md-4">
-            <TopStudents students={students} />
-          </div>
-        )}
-
-        {teachers?.length > 0 && (
-          <div className="col-md-4">
-            <TopTeachers teachers={teachers} />
-          </div>
-        )}
-      </div>
-
-      {topProducts?.length > 0 && (
-        <div className="row justify-content-center mt-4 mb-5 g-4">
-          <div className="col-md-8">
-            <TopProducts topProducts={topProducts} />
-          </div>
+ return (
+  <div className="container mt-5">
+    <div className="row justify-content-center g-4">
+      <h1 className="text-center mb-2 text-primary fw-bold">Overview</h1>
+      
+      {students?.length > 0 ? (
+        <div className="col-md-4">
+          <TopStudents students={students} />
         </div>
+      ) : (
+        <EmptyState message="لا يوجد طلاب" />
+      )}
+
+      {teachers?.length > 0 ? (
+        <div className="col-md-4">
+          <TopTeachers teachers={teachers} />
+        </div>
+      ) : (
+        <EmptyState message="لا يوجد معلمون" />
       )}
     </div>
-  );
+
+    <div className="row justify-content-center mt-4 mb-5 g-4">
+      {topProducts?.length > 0 ? (
+        <div className="col-md-8">
+          <TopProducts topProducts={topProducts} />
+        </div>
+      ) : (
+        <EmptyState message="لا توجد منتجات" />
+      )}
+    </div>
+  </div>
+);
 };
 
 export default Overview;
